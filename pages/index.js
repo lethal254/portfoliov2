@@ -9,8 +9,9 @@ import Heading from "./components/Heading"
 import ServiceCard from "./components/ServiceCard"
 import ProjectCard from "./components/ProjectCard"
 import { useEffect, useState } from "react"
+import client from "../sanity"
 
-export default function Home() {
+export default function Home({ heroText, aboutText }) {
   const [showPreloader, setShowPreloader] = useState(true)
   useEffect(() => {
     setTimeout(() => {
@@ -26,7 +27,7 @@ export default function Home() {
       ) : (
         <Layout>
           <section className={styles.heroSection}>
-            <h2>Building beautiful web experience</h2>
+            <h2>{heroText ? heroText.herotext : ""}</h2>
             <div className={styles.socialIcons}>
               <InstagramIcon />
               <TwitterIcon />
@@ -41,12 +42,7 @@ export default function Home() {
                 <Image src='/avatar2.jpg' width={400} height={300} alt='me' />
               </div>
               <div className={styles.aboutTypography}>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Facere deserunt ex animi nihil saepe ut modi ab atque incidunt
-                  quae tempora quidem assumenda dolor officia illum repellendus,
-                  adipisci voluptates veniam.
-                </p>
+                <p>{aboutText ? aboutText.abouttext : ""}</p>
                 <div className={styles.techIcons}>
                   <Image src='/react1.svg' width={30} height={30} alt='React' />
                   <Image
@@ -112,4 +108,21 @@ export default function Home() {
       )}
     </div>
   )
+}
+
+export async function getServerSideProps() {
+  const heroText = await client.fetch(
+    `*[_type == "herotext"\][0]{
+      herotext
+    }`
+  )
+  const aboutText = await client.fetch(
+    `*[_type == "abouttext"\][0]{
+      abouttext
+    }`
+  )
+
+  return {
+    props: { heroText, aboutText },
+  }
 }
