@@ -101,7 +101,7 @@ export default function Home({ heroText, aboutText }) {
                 reprehenderit eveniet impedit itaque sit a, iusto necessitatibus
                 sequi quasi deserunt ullam atque quam.
               </p>
-              <Button mail>Hire me</Button>
+              <Button mail={true}>Hire me</Button>
             </div>
           </section>
         </Layout>
