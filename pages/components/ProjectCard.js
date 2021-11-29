@@ -21,10 +21,10 @@ const ProjectCard = ({ title, image, github, live, techs }) => {
           </div>
         </div>
         <div className={styles.right}>
-          <Link href={github?.github} passHref>
+          <Link href={github ? github : ""} passHref>
             <GitHubIcon />
           </Link>
-          <Link href={live?.live} passHref>
+          <Link href={live ? live : ""} passHref>
             <IosShareIcon />
           </Link>
         </div>
