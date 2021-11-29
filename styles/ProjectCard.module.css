@@ -5,7 +5,7 @@
   cursor: pointer;
   transition: all 0.5s ease;
 }
-.card:hover {
+.card:hover .cardImage {
   filter: sepia(80%);
 }
 .cardImage {
@@ -22,7 +22,7 @@
 }
 
 .left h3 {
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 500;
   color: #fff;
   line-height: 3rem;
@@ -32,7 +32,7 @@
   justify-content: space-between;
 }
 .techs p {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: #fff;
   font-weight: 400;
 }

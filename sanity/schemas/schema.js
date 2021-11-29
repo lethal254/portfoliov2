@@ -39,6 +39,7 @@ export default createSchema({
       type: "document",
       title: "Projects",
       fields: [
+        { name: "title", type: "string", title: "Title" },
         { name: "image", type: "image", title: "Image" },
         {
           name: "techs",

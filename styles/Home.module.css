@@ -38,6 +38,7 @@
   margin-top: 5rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .aboutTypography {
   width: 50%;
@@ -58,7 +59,7 @@
 }
 .services {
   display: grid;
-  gap: 2rem;
+  gap: 3rem;
   grid-template-columns: 1fr 1fr 1fr;
   margin-top: 3rem;
 }
@@ -85,8 +86,17 @@
 }
 
 @media (max-width: 600px) {
+  .preloader {
+    font-size: 2rem;
+  }
   .aboutContent {
     flex-direction: column;
+  }
+  .aboutTypography {
+    width: 100%;
+  }
+  .techIcons {
+    width: 100%;
   }
   .projects {
     grid-template-columns: 1fr;

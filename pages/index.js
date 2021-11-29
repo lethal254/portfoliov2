@@ -10,8 +10,9 @@ import ServiceCard from "./components/ServiceCard"
 import ProjectCard from "./components/ProjectCard"
 import { useEffect, useState } from "react"
 import client from "../sanity"
+import Link from "next/link"
 
-export default function Home({ heroText, aboutText }) {
+export default function Home({ heroText, aboutText, services, projects }) {
   const [showPreloader, setShowPreloader] = useState(true)
   useEffect(() => {
     setTimeout(() => {
@@ -22,6 +23,7 @@ export default function Home({ heroText, aboutText }) {
     <div className={styles.container}>
       {showPreloader ? (
         <div className={styles.preloader}>
+          {console.log(projects)}
           <h1>bennycodes</h1>
         </div>
       ) : (
@@ -29,9 +31,15 @@ export default function Home({ heroText, aboutText }) {
           <section className={styles.heroSection}>
             <h2>{heroText ? heroText.herotext : ""}</h2>
             <div className={styles.socialIcons}>
-              <InstagramIcon />
-              <TwitterIcon />
-              <GitHubIcon />
+              <Link href='https://www.instagram.com/bennycodes/' passHref>
+                <InstagramIcon />
+              </Link>
+              <Link href='https://twitter.com/bennycodes' passHref>
+                <TwitterIcon />
+              </Link>
+              <Link href='https://github.com/lethal254' passHref>
+                <GitHubIcon />
+              </Link>
             </div>
             <Button>Talk to me</Button>
           </section>
@@ -39,7 +47,7 @@ export default function Home({ heroText, aboutText }) {
             <Heading>About</Heading>
             <div className={styles.aboutContent}>
               <div className={styles.avatarContainer}>
-                <Image src='/avatar2.jpg' width={400} height={300} alt='me' />
+                <Image src='/ben.svg' width={500} height={500} alt='me' />
               </div>
               <div className={styles.aboutTypography}>
                 <p>{aboutText ? aboutText.abouttext : ""}</p>
@@ -66,17 +74,17 @@ export default function Home({ heroText, aboutText }) {
             <div className={styles.services}>
               <ServiceCard
                 image='/design 1.svg'
-                text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi eum id est inventore eos quam tempore hic magni, deleniti culpa?'
+                text={services ? services.graphics : ""}
                 title='Graphic Design'
               />
               <ServiceCard
                 image='/code 1.svg'
-                text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi eum id est inventore eos quam tempore hic magni, deleniti culpa?'
+                text={services ? services.web : ""}
                 title='Web Development'
               />
               <ServiceCard
                 image='/social-promotion 1.svg'
-                text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi eum id est inventore eos quam tempore hic magni, deleniti culpa?'
+                text={services ? services.social : ""}
                 title='Social media marketing'
               />
             </div>
@@ -84,22 +92,28 @@ export default function Home({ heroText, aboutText }) {
           <section className={styles.projectSection} id='projects'>
             <Heading>Projects</Heading>
             <div className={styles.projects}>
-              <ProjectCard />
-              <ProjectCard />
-              <ProjectCard />
-              <ProjectCard />
-              <ProjectCard />
-              <ProjectCard />
+              {projects &&
+                projects.map((project) => (
+                  <>
+                    <ProjectCard
+                      title={project.title}
+                      image={project.image.asset.url}
+                      github={project.githublink}
+                      live={project.livelink}
+                      techs={project.techs}
+                    />
+                  </>
+                ))}
             </div>
           </section>
           <section className={styles.contactSection} id='contact'>
             <Heading>Talk to me</Heading>
             <div className={styles.contactContent}>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat
-                sunt, laboriosam esse doloremque et, facilis temporibus
-                reprehenderit eveniet impedit itaque sit a, iusto necessitatibus
-                sequi quasi deserunt ullam atque quam.
+                If you have a question please feel free to drop me a line. If
+                you don't get your answer immediately I might just be travelling
+                through the middle of nowhere. I'll get back to you as soon as I
+                can. I promise!
               </p>
               <Button mail={true}>Hire me</Button>
             </div>
@@ -122,7 +136,27 @@ export async function getServerSideProps() {
     }`
   )
 
+  const services = await client.fetch(`*[_type == "servicestext"\][0]{
+    graphics,
+    web,
+    social,
+  }`)
+
+  const projects = await client.fetch(`*[_type == "projects"\]{
+    title,
+    githublink,
+    livelink,
+    techs,
+    image{
+      asset ->{
+        url,
+
+      },
+      alt
+    }
+  }`)
+
   return {
-    props: { heroText, aboutText },
+    props: { heroText, aboutText, services, projects },
   }
 }

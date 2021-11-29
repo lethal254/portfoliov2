@@ -1,21 +1,32 @@
 import styles from "../../styles/ProjectCard.module.css"
 import GitHubIcon from "@mui/icons-material/GitHub"
 import IosShareIcon from "@mui/icons-material/IosShare"
+import Link from "next/link"
 
-const ProjectCard = () => {
+const ProjectCard = ({ title, image, github, live, techs }) => {
   return (
     <div className={styles.card}>
       <div
         className={styles.cardImage}
-        style={{ backgroundImage: `url(${"/avatar.jpg"})` }}></div>
+        style={{ backgroundImage: `url(${image})` }}></div>
       <div className={styles.cardTypography}>
         <div className={styles.left}>
-          <h3>Lorem ipsum dolor</h3>
+          <h3>{title}</h3>
           <div className={styles.techs}>
-            <p>React</p>
-            <p>NodeJs</p>
-            <p>Next Js</p>
+            {techs.map((tech) => (
+              <>
+                <p>#{tech}</p>
+              </>
+            ))}
           </div>
+        </div>
+        <div className={styles.right}>
+          <Link href={github} passHref>
+            <GitHubIcon />
+          </Link>
+          <Link href={live} passHref>
+            <IosShareIcon />
+          </Link>
         </div>
       </div>
     </div>
