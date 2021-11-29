@@ -8,10 +8,10 @@ const ProjectCard = ({ title, image, github, live, techs }) => {
     <div className={styles.card}>
       <div
         className={styles.cardImage}
-        style={{ backgroundImage: `url(${image?.image})` }}></div>
+        style={{ backgroundImage: `url(${image && image})` }}></div>
       <div className={styles.cardTypography}>
         <div className={styles.left}>
-          <h3>{title?.title}</h3>
+          <h3>{title && title}</h3>
           <div className={styles.techs}>
             {techs?.map((tech) => (
               <>
