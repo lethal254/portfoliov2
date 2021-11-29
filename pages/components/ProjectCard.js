@@ -13,7 +13,7 @@ const ProjectCard = ({ title, image, github, live, techs }) => {
         <div className={styles.left}>
           <h3>{title}</h3>
           <div className={styles.techs}>
-            {techs.map((tech) => (
+            {techs?.map((tech) => (
               <>
                 <p>#{tech}</p>
               </>
