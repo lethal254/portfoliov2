@@ -111,9 +111,9 @@ export default function Home({ heroText, aboutText, services, projects }) {
             <div className={styles.contactContent}>
               <p>
                 If you have a question please feel free to drop me a line. If
-                you don't get your answer immediately I might just be travelling
-                through the middle of nowhere. I'll get back to you as soon as I
-                can. I promise!
+                you dont get your answer immediately I might just be travelling
+                through the middle of nowhere. I will get back to you as soon as
+                I can. I promise!
               </p>
               <Button mail={true}>Hire me</Button>
             </div>
