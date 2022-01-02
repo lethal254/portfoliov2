@@ -29,19 +29,22 @@ export default function Home({ heroText, aboutText, services, projects }) {
       ) : (
         <Layout>
           <section className={styles.heroSection}>
-            <h2>{heroText ? heroText.herotext : ""}</h2>
-            <div className={styles.socialIcons}>
-              <Link href='https://www.instagram.com/bennycodes/' passHref>
-                <InstagramIcon />
-              </Link>
-              <Link href='https://twitter.com/bennycodes' passHref>
-                <TwitterIcon />
-              </Link>
-              <Link href='https://github.com/lethal254' passHref>
-                <GitHubIcon />
-              </Link>
+            <div className={styles.herosectionLeft}>
+              <h2>{heroText ? heroText.herotext : ""}</h2>
+              <div className={styles.socialIcons}>
+                <Link href='https://www.instagram.com/bennycodes/' passHref>
+                  <InstagramIcon />
+                </Link>
+                <Link href='https://twitter.com/bennycodes' passHref>
+                  <TwitterIcon />
+                </Link>
+                <Link href='https://github.com/lethal254' passHref>
+                  <GitHubIcon />
+                </Link>
+              </div>
+              <Button>Talk to me</Button>
             </div>
-            <Button>Talk to me</Button>
+            <div className={styles.herosectionRight}></div>
           </section>
           <section className={styles.aboutSection} id='about'>
             <Heading>About</Heading>

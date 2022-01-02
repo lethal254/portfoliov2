@@ -8,10 +8,14 @@
   font-size: 3rem;
   font-weight: 900;
 }
+.heroSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
 .heroSection h2 {
   color: #fff;
   font-size: 5rem;
-  width: 50%;
   margin-top: 10rem;
   font-weight: 700;
   line-height: 65px;
@@ -20,6 +24,12 @@
   background-position: center;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+.herosectionLeft {
+}
+.herosectionRight {
+  background: url("/blob.gif");
+  background-repeat: no-repeat;
 }
 .socialIcons {
   margin: 4rem 0;
@@ -41,7 +51,13 @@
   align-items: center;
 }
 .aboutTypography {
-  width: 50%;
+  width: 70%;
+  backdrop-filter: blur(17px) saturate(0%);
+  -webkit-backdrop-filter: blur(17px) saturate(0%);
+  background-color: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  padding: 2rem;
 }
 .aboutTypography p {
   font-size: 1.5rem;
