@@ -1,0 +1,10 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://bennycodes.me
+
+# Sitemaps
+Sitemap: https://bennycodes.me/sitemap.xml
+Sitemap: https://bennycodes.me/server-sitemap.xml

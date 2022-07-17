@@ -1,65 +1,115 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-html,
-body {
-  font-family: "Roboto", sans-serif;
-  color: #100c08;
-  background: #010406;
-  font-size: 62.5%;
+@layer components {
+  .button {
+    @apply h-full w-fit rounded-md bg-transparent px-4 py-2  font-semibold text-gray-200  shadow-sm transition-all duration-150 hover:bg-sky-600 ease-linear hover:text-white  border-2 border-sky-600 hover:bg-opacity-20;
+  }
+  .navLink {
+    @apply hover:text-sky-600 transition-all duration-150 ease-linear cursor-pointer;
+  }
+}
+
+#logo {
+  animation: fill-letters 0.5s ease forwards 2s;
+}
+
+#logo path:nth-child(2) {
+  stroke-dasharray: 265px;
+  stroke-dashoffset: 265px;
+  animation: line-anim 1.5s ease forwards;
+}
+#logo-circle {
+  stroke-dasharray: 50px;
+  fill: transparent;
+  animation: fill-circle 0.5s ease forwards 2s;
+}
+.mobile-nav {
+  animation: reveal 0.5s ease forwards;
+}
+.myImage {
+  position: relative;
+  display: block;
+  z-index: 4;
+}
+.myImage::after {
+  position: absolute;
+  border: 2px solid #0284c7;
+  content: "";
+  top: 15px;
+  left: 15px;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.verticate {
+  writing-mode: vertical-rl;
+  -webkit-writing-mode: vertical-rl;
+  font-smooth: antialised;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+  color: white !important;
 }
-
-*,
-html,
+a:hover {
+  color: #0284c7 !important;
+}
+.ant-tabs-tab-btn {
+  color: white !important;
+}
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #0284c7 !important;
+}
 body {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
-  -moz-animation: fadein 2s; /* Firefox < 16 */
-  -ms-animation: fadein 2s; /* Internet Explorer */
-  -o-animation: fadein 2s; /* Opera < 12.1 */
-  animation: fadein 2s;
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
 }
-@keyframes fadein {
+body::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+.portable h2,
+h3 {
+  color: white;
+  font-size: 1.2rem;
+}
+.portable strong {
+  color: skyblue;
+}
+.portable code {
+  background: #0a101fb2;
+}
+.about strong {
+  color: skyblue;
+}
+
+@keyframes line-anim {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes fill-letters {
   from {
-    opacity: 0;
+    fill: transparent;
   }
   to {
-    opacity: 1;
+    fill: white;
+  }
+}
+@keyframes fill-circle {
+  from {
+    fill: transparent;
+  }
+  to {
+    fill: #14c3ff;
   }
 }
 
-/* Firefox < 16 */
-@-moz-keyframes fadein {
+@keyframes reveal {
   from {
-    opacity: 0;
+    width: 0;
   }
   to {
-    opacity: 1;
-  }
-}
-
-/* Safari, Chrome and Opera > 12.1 */
-@-webkit-keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* Internet Explorer */
-@-ms-keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
+    width: 100%;
   }
 }

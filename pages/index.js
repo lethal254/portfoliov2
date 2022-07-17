@@ -1,165 +1,251 @@
-import Image from "next/image"
-import styles from "../styles/Home.module.css"
-import Layout from "./components/Layout"
-import InstagramIcon from "@mui/icons-material/Instagram"
-import TwitterIcon from "@mui/icons-material/Twitter"
-import GitHubIcon from "@mui/icons-material/GitHub"
-import Button from "./components/Button"
-import Heading from "./components/Heading"
-import ServiceCard from "./components/ServiceCard"
-import ProjectCard from "./components/ProjectCard"
+/* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from "react"
 import client from "../sanity"
+import Loader from "../components/Loader"
+import {
+  SiJavascript,
+  SiNextdotjs,
+  SiFirebase,
+  SiTypescript,
+  SiMongodb,
+} from "react-icons/si"
+import { FaReact, FaNode } from "react-icons/fa"
+import { ImArrowRight } from "react-icons/im"
+import { Tabs } from "antd"
+import ProjectCard from "../components/ProjectCard"
 import Link from "next/link"
+import { PortableText } from "@portabletext/react"
 
-export default function Home({ heroText, aboutText, services, projects }) {
+const { TabPane } = Tabs
+
+function useWindowSize() {
+  const [windowSize, setWindowSize] = useState({
+    width: undefined,
+    height: undefined,
+  })
+
+  useEffect(() => {
+    // only execute all the code below in client side
+    if (typeof window !== "undefined") {
+      // Handler to call on window resize
+      function handleResize() {
+        // Set window width/height to state
+        setWindowSize({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        })
+      }
+
+      // Add event listener
+      window.addEventListener("resize", handleResize)
+
+      // Call handler right away so state gets updated with initial window size
+      handleResize()
+
+      // Remove event listener on cleanup
+      return () => window.removeEventListener("resize", handleResize)
+    }
+  }, []) // Empty array ensures that effect is only run on mount
+  return windowSize
+}
+
+export default function Home({ landingPageContent, projects, previousJobs }) {
   const [showPreloader, setShowPreloader] = useState(true)
+  const [tabPosition, setTabPosition] = useState("left")
+  const { width, height } = useWindowSize()
+
+  console.log(previousJobs)
+
+  useEffect(() => {
+    if (width < 800) {
+      setTabPosition("top")
+    } else {
+      setTabPosition("left")
+    }
+  }, [width])
+
   useEffect(() => {
     setTimeout(() => {
       setShowPreloader(false)
     }, 3000)
   })
-  return (
-    <div className={styles.container}>
-      {showPreloader ? (
-        <div className={styles.preloader}>
-          {console.log(projects)}
-          <h1>bennycodes</h1>
-        </div>
-      ) : (
-        <Layout>
-          <section className={styles.heroSection}>
-            <div className={styles.herosectionLeft}>
-              <h2>{heroText ? heroText.herotext : ""}</h2>
-              <div className={styles.socialIcons}>
-                <Link href='https://www.instagram.com/bennycodes/' passHref>
-                  <InstagramIcon />
-                </Link>
-                <Link href='https://twitter.com/bennycodes' passHref>
-                  <TwitterIcon />
-                </Link>
-                <Link href='https://github.com/lethal254' passHref>
-                  <GitHubIcon />
-                </Link>
-              </div>
-              <Button>Talk to me</Button>
-            </div>
-            <div className={styles.herosectionRight}></div>
-          </section>
-          <section className={styles.aboutSection} id='about'>
-            <Heading>About</Heading>
-            <div className={styles.aboutContent}>
-              <div className={styles.avatarContainer}>
-                <Image src='/ben.svg' width={500} height={500} alt='me' />
-              </div>
-              <div className={styles.aboutTypography}>
-                <p>{aboutText ? aboutText.abouttext : ""}</p>
-                <div className={styles.techIcons}>
-                  <Image src='/react1.svg' width={30} height={30} alt='React' />
-                  <Image
-                    src='/next-js2.svg'
-                    width={30}
-                    height={30}
-                    alt='React'
-                  />
-                  <Image
-                    src='/node-js2.svg'
-                    width={30}
-                    height={30}
-                    alt='React'
-                  />
-                </div>
-              </div>
-            </div>
-          </section>
-          <section className={styles.servicesSection} id='services'>
-            <Heading>Services</Heading>
-            <div className={styles.services}>
-              <ServiceCard
-                image='/design 1.svg'
-                text={services ? services.graphics : ""}
-                title='Graphic Design'
-              />
-              <ServiceCard
-                image='/code 1.svg'
-                text={services ? services.web : ""}
-                title='Web Development'
-              />
-              <ServiceCard
-                image='/social-promotion 1.svg'
-                text={services ? services.social : ""}
-                title='Social media marketing'
+
+  const convertTimeStamp = (timeStamp) => {
+    const date = new Date(timeStamp)
+
+    return date.toString().slice(0, 15)
+  }
+  if (showPreloader) {
+    return <Loader />
+  } else {
+    return (
+      <>
+        {/* Hero */}
+        <section className=' h-[70vh]  lg:min-h-[60vh] flex items-center'>
+          <div className=' lg:w-[50%] md:w-[70%] w-[95%] leading-loose'>
+            <h2 className='text-sky-600 mb-6 font-medium'>Hello, my name is</h2>
+            <h1 className='text-4xl md:text-6xl  font-bold text-gray-200'>
+              Benard Ogutu
+              <br />
+              <span className='text-gray-400'>
+                {landingPageContent.tagline}
+              </span>
+            </h1>
+            <h3 className='mt-6 text-gray-200 text-base'>
+              {landingPageContent.introduction}
+            </h3>
+            <Link href={landingPageContent.cv.asset.url} passHref>
+              <a target='_blank'>
+                <button className='button mt-6'>Resume</button>
+              </a>
+            </Link>
+          </div>
+        </section>
+        {/* Technologies */}
+        <section className='h-[10vh] mt-10 '>
+          <div className='bg-slate-800 rounded-md md:w-[60%] mx-auto h-[100%] flex items-center justify-between px-6 '>
+            <SiJavascript className='text-gray-200 md:text-5xl text-3xl mr-2 hover:animate-pulse cursor-pointer hover:text-sky-600 transition-all duration-150 ease-linear' />
+            <SiTypescript className='text-gray-200 md:text-5xl text-3xl mr-2 hover:animate-pulse cursor-pointer hover:text-sky-600 transition-all duration-150 ease-linear' />
+            <FaNode className='text-gray-200 md:text-5xl text-3xl mr-2 hover:animate-pulse cursor-pointer hover:text-sky-600 transition-all duration-150 ease-linear' />
+            <FaReact className='text-gray-200 md:text-5xl text-3xl mr-2 hover:animate-pulse cursor-pointer hover:text-sky-600 transition-all duration-150 ease-linear' />
+            <SiNextdotjs className='text-gray-200 md:text-5xl text-3xl mr-2 hover:animate-pulse cursor-pointer hover:text-sky-600 transition-all duration-150 ease-linear' />
+            <SiFirebase className='text-gray-200 md:text-5xl text-3xl mr-2 hover:animate-pulse cursor-pointer hover:text-sky-600 transition-all duration-150 ease-linear' />
+            <SiMongodb className='text-gray-200 md:text-5xl text-3xl mr-2 hover:animate-pulse cursor-pointer hover:text-sky-600 transition-all duration-150 ease-linear' />
+          </div>
+        </section>
+        {/* About me */}
+        <section className='flex min-h-[60vh]  mt-32 lg:w-[80%] mx-auto  flex-col '>
+          <div className='flex items-center'>
+            <h2 className='text-gray-200 md:text-2xl lg:text-3xl text-xl'>
+              About me
+            </h2>
+            <div className='md:w-[40%] lg:w-[20%] w-[50%] h-[0.1px] bg-gray-50 bg-opacity-20 ml-2'></div>
+          </div>
+          <div className='flex mt-6 md:flex-row flex-col  justify-between text-base'>
+            <article className='md:w-[50%] lg:w-[70%]  text-gray-400 about'>
+              <PortableText value={landingPageContent.aboutme} />
+            </article>
+            <div className='md:w-[50%] lg:w-[30%]  relative block  myImage rounded-md'>
+              <img
+                width='100%'
+                height='100%'
+                alt='Me'
+                src='/devices.svg'
+                className='rounded-md object-contain block '
               />
             </div>
-          </section>
-          <section className={styles.projectSection} id='projects'>
-            <Heading>Projects</Heading>
-            <div className={styles.projects}>
-              {projects &&
-                projects.map((project) => (
+          </div>
+        </section>
+        {/* Where i've worked */}
+        <section className='flex min-h-[60vh] mt-20   lg:w-[60%] mx-auto  flex-col items-center'>
+          <div className='flex items-center w-full  mb-4'>
+            <h2 className='text-gray-200 md:text-2xl lg:text-3xl text-xl'>
+              Previous jobs
+            </h2>
+            <div className='md:w-[40%] lg:w-[20%] w-[50%] h-[0.1px] bg-gray-50 bg-opacity-20 ml-2'></div>
+          </div>
+          <div>
+            <Tabs tabPosition={tabPosition}>
+              {previousJobs.map((job) => {
+                return (
                   <>
-                    <ProjectCard
-                      title={project.title}
-                      image={project.image.asset.url}
-                      github={project.githublink}
-                      live={project.livelink}
-                      techs={project.techs}
-                    />
+                    <TabPane tab={job.company} key='1'>
+                      <div>
+                        <h3 className='md:text-xl text-lg  text-gray-200'>
+                          {job.title}
+                          <span className='text-sky-600 '> @{job.company}</span>
+                        </h3>
+                        <h4 className='text-sm text-gray-300'>
+                          {convertTimeStamp(job.fromDate)} -{" "}
+                          {convertTimeStamp(job.toDate)}
+                        </h4>
+                        <div className='text-gray-400'>
+                          <PortableText value={job.description} />
+                        </div>
+                      </div>
+                    </TabPane>
                   </>
-                ))}
-            </div>
-          </section>
-          <section className={styles.contactSection} id='contact'>
-            <Heading>Talk to me</Heading>
-            <div className={styles.contactContent}>
-              <p>
-                If you have a question please feel free to drop me a line. If
-                you dont get your answer immediately I might just be travelling
-                through the middle of nowhere. I will get back to you as soon as
-                I can. I promise!
-              </p>
-              <Button mail={true}>Hire me</Button>
-            </div>
-          </section>
-        </Layout>
-      )}
-    </div>
-  )
+                )
+              })}
+            </Tabs>
+          </div>
+        </section>
+        {/* Some of my work */}
+        <section className='flex min-h-[60vh] mt-10  lg:w-[100%] mx-auto flex-col '>
+          <div className='flex items-center w-full  mb-10'>
+            <h2 className='text-gray-200 md:text-2xl lg:text-3xl text-xl'>
+              Some of my work
+            </h2>
+            <div className='md:w-[40%] lg:w-[20%] w-[50%] h-[0.1px] bg-gray-50 bg-opacity-20 ml-2'></div>
+          </div>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 gap-y-8'>
+            {projects.map((project) => (
+              <>
+                <ProjectCard key={project.title} project={project} />
+              </>
+            ))}
+          </div>
+        </section>
+        {/* Contact */}
+        <section className='md:min-h-[50vh] min-h-[40vh] md:w-[40%] mt-20 md:mt-0 mx-auto text-center'>
+          <h2 className='text-gray-200 md:text-3xl lg:text-4xl text-xl'>
+            Get in touch
+          </h2>
+
+          <p className='text-gray-400 md:text-base '>
+            {landingPageContent.contactContent}
+          </p>
+          <Link href='mailto:benardogutu65@gmail.com' passHref>
+            <button className='button h-fit w-[40%] mt-12'>Say Hello</button>
+          </Link>
+        </section>
+      </>
+    )
+  }
 }
 
 export async function getServerSideProps() {
-  const heroText = await client.fetch(
-    `*[_type == "herotext"\][0]{
-      herotext
-    }`
-  )
-  const aboutText = await client.fetch(
-    `*[_type == "abouttext"\][0]{
-      abouttext
-    }`
-  )
-
-  const services = await client.fetch(`*[_type == "servicestext"\][0]{
-    graphics,
-    web,
-    social,
-  }`)
-
-  const projects = await client.fetch(`*[_type == "projects"\]{
-    title,
-    githublink,
-    livelink,
-    techs,
-    image{
-      asset ->{
-        url,
-
+  const landingPageContent = await client.fetch(
+    `*[_type == "landingContent"][0]{
+      tagline,
+      introduction,
+      cv{
+        asset ->{
+          url
+        }
       },
-      alt
+      aboutme,
+      contactContent
+    }`
+  )
+  const projects = await client.fetch(`
+  *[_type == "portfolio"]{
+    title,
+    description,
+    tags[]->{
+      title
+    },
+    githubLink,
+    liveLink,
+    projectImage{
+      asset -> {
+        url
+      }
     }
-  }`)
+  }
+  `)
+
+  const previousJobs = await client.fetch(`
+    *[_type == "previousJobs"]{
+      title,
+      company,
+      fromDate,
+      toDate,
+      description
+    }
+  `)
 
   return {
-    props: { heroText, aboutText, services, projects },
+    props: { landingPageContent, projects, previousJobs },
   }
 }
