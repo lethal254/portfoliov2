@@ -3,6 +3,7 @@ import Image from "next/image"
 import Loader from "../../components/Loader"
 import Link from "next/link"
 import client from "../../sanity"
+import Head from "next/head"
 
 const Blog = ({ blogs }) => {
   const [showPreloader, setShowPreloader] = useState(true)
@@ -19,10 +20,34 @@ const Blog = ({ blogs }) => {
   }
 
   if (showPreloader) {
-    return <Loader />
+    return (
+      <>
+        <Head>
+          <title>My Blog</title>
+          <meta
+            name='description'
+            content='I write content revolving around the js ecosystem. Learn React, NextJs, NodeJs and other cool stuff with me.'
+          />
+          <meta
+            name='viewport'
+            content='width=device-width, initial-scale=1'></meta>
+        </Head>
+        <Loader />
+      </>
+    )
   } else {
     return (
       <div>
+        <Head>
+          <title>My Blog</title>
+          <meta
+            name='description'
+            content='I write content revolving around the js ecosystem. Learn React, NextJs, NodeJs and other cool stuff with me.'
+          />
+          <meta
+            name='viewport'
+            content='width=device-width, initial-scale=1'></meta>
+        </Head>
         <div className='flex items-center'>
           <h2 className='text-gray-200 md:text-2xl lg:text-3xl text-xl'>
             Blog

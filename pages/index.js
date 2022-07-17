@@ -15,6 +15,7 @@ import { Tabs } from "antd"
 import ProjectCard from "../components/ProjectCard"
 import Link from "next/link"
 import { PortableText } from "@portabletext/react"
+import Head from "next/head"
 
 const { TabPane } = Tabs
 
@@ -76,11 +77,44 @@ export default function Home({ landingPageContent, projects, previousJobs }) {
     return date.toString().slice(0, 15)
   }
   if (showPreloader) {
-    return <Loader />
+    return (
+      <>
+        <Head>
+          <title>Benard Ogutu || Fullstack Javascript Developer</title>
+          <meta
+            name='description'
+            content='Benard Ogutu is a software engineer specializing in building (and occasionally designing) exceptional digital experiences. '
+          />
+          <meta
+            name='viewport'
+            content='width=device-width, initial-scale=1'></meta>
+          <meta
+            name='google-site-verification'
+            content='pCHe05aB32iXQjkySobbOtYWRMs_p8Rh8KWj8qBCdnA'
+          />
+        </Head>
+        <Loader />
+      </>
+    )
   } else {
     return (
       <>
+        <Head>
+          <title>Benard Ogutu || Fullstack Javascript Developer</title>
+          <meta
+            name='description'
+            content='Benard Ogutu is a software engineer specializing in building (and occasionally designing) exceptional digital experiences. '
+          />
+          <meta
+            name='viewport'
+            content='width=device-width, initial-scale=1'></meta>
+          <meta
+            name='google-site-verification'
+            content='pCHe05aB32iXQjkySobbOtYWRMs_p8Rh8KWj8qBCdnA'
+          />
+        </Head>
         {/* Hero */}
+
         <section className=' h-[70vh]  lg:min-h-[60vh] flex items-center'>
           <div className=' lg:w-[50%] md:w-[70%] w-[95%] leading-loose'>
             <h2 className='text-sky-600 mb-6 font-medium'>Hello, my name is</h2>

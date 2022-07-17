@@ -4,6 +4,7 @@ import client from "../../sanity"
 import { PortableText } from "@portabletext/react"
 import imageUrlBuilder from "@sanity/image-url"
 const builder = imageUrlBuilder(client)
+import Head from "next/head"
 
 function urlFor(source) {
   return builder.image(source)
@@ -41,6 +42,13 @@ const SingleBlog = ({ blog }) => {
   }
   return (
     <div className='w-[90%]  md:w-[80%] lg:w-[60%] mx-auto'>
+      <Head>
+        <title>{blog.blogtitle}</title>
+        <meta name='description' content={blog.shortDescription} />
+        <meta
+          name='viewport'
+          content='width=device-width, initial-scale=1'></meta>
+      </Head>
       <Image
         src={blog.mainImage.asset.url}
         alt='Blog image'
