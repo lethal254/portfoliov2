@@ -182,7 +182,7 @@ export default function Home({ landingPageContent, projects, previousJobs }) {
             </h2>
             <div className='md:w-[40%] lg:w-[20%] w-[50%] h-[0.1px] bg-gray-50 bg-opacity-20 ml-2'></div>
           </div>
-          <div>
+          <div className='max-w-[100%] overflow-x-auto'>
             <Tabs tabPosition={tabPosition}>
               {previousJobs.map((job) => {
                 return (
