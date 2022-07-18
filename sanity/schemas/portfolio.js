@@ -29,6 +29,13 @@ export const portfolio = {
       type: "url",
       title: "Live Link",
     },
-    { name: "projectImage", title: "Project Image", type: "image" },
+    {
+      name: "projectImage",
+      title: "Project Image",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+    },
   ],
 }
