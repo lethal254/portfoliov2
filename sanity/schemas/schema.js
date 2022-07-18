@@ -10,6 +10,7 @@ import { author } from "./author"
 import { landingContent } from "./landingContent"
 import { portfolio } from "./portfolio"
 import { previousJobs } from "./previousJobs"
+import { comment } from "./comment"
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -25,5 +26,6 @@ export default createSchema({
     landingContent,
     portfolio,
     previousJobs,
+    comment,
   ]),
 })
