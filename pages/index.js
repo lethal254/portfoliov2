@@ -229,7 +229,7 @@ export default function Home({ landingPageContent, projects, previousJobs }) {
         {/* Contact */}
         <section
           name='contact'
-          className='md:min-h-[50vh] min-h-[40vh] md:w-[40%] mt-20 md:mt-0 mx-auto text-center'>
+          className='md:min-h-[40vh] min-h-[40vh] md:w-[40%] mt-20 mx-auto text-center'>
           <h2 className='text-gray-200 md:text-3xl lg:text-4xl text-xl'>
             Get in touch
           </h2>

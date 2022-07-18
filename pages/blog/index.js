@@ -37,7 +37,7 @@ const Blog = ({ blogs }) => {
     )
   } else {
     return (
-      <div className='h-[70vh]  lg:min-h-[60vh]'>
+      <div className='min-h-[100vh]  lg:min-h-[60vh]'>
         <Head>
           <title>My Blog</title>
           <meta
@@ -76,7 +76,9 @@ const Blog = ({ blogs }) => {
                       {convertTimeStamp(blog.postedAt)}
                     </h4>
                     <h2 className='text-gray-200 text-2xl'>{blog.blogtitle}</h2>
-                    <p className='text-gray-300'>{blog.shortDescription}</p>
+                    <p className='text-gray-300'>
+                      {blog.shortDescription.slice(0, 150) + "..."}
+                    </p>
                   </div>
                 </Link>
               </>

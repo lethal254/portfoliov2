@@ -61,7 +61,10 @@ const SingleBlog = ({ blog }) => {
     <div className='w-[100%] md:w-[80%] lg:w-[60%] mx-auto'>
       <Head>
         <title>{blog.blogtitle}</title>
-        <meta name='description' content={blog.shortDescription} />
+        <meta
+          name='description'
+          content={blog.shortDescription.slice(0, 150) + "..."}
+        />
         <meta
           name='viewport'
           content='width=device-width, initial-scale=1'></meta>

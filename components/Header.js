@@ -20,8 +20,10 @@ const Header = () => {
 
   return (
     <header className='fixed top-0 left-0 flex w-[100%] justify-between lg:flex-row flex-col bg-slate-900 py-2 md:py-3 bg-opacity-90 backdrop-blur-sm mb-10 z-20 px-4 md:px-6'>
-      <div>
-        <Image src='/Logo.svg' width={50} height={50} alt='Logo' />
+      <div className='cursor-pointer'>
+        <NextLink href='/'>
+          <Image src='/Logo.svg' width={50} height={50} alt='Logo' />
+        </NextLink>
       </div>
       <div className='lg:hidden absolute right-0 mr-4'>
         {showMobileNav ? (
