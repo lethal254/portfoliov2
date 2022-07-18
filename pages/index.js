@@ -115,7 +115,9 @@ export default function Home({ landingPageContent, projects, previousJobs }) {
         </Head>
         {/* Hero */}
 
-        <section className=' h-[70vh]  lg:min-h-[60vh] flex items-center'>
+        <section
+          name='hero'
+          className=' h-[70vh]  lg:min-h-[60vh] flex items-center'>
           <div className=' lg:w-[50%] md:w-[70%] w-[95%] leading-loose'>
             <h2 className='text-sky-600 mb-6 font-medium'>Hello, my name is</h2>
             <h1 className='text-4xl md:text-6xl  font-bold text-gray-200'>
@@ -148,7 +150,9 @@ export default function Home({ landingPageContent, projects, previousJobs }) {
           </div>
         </section>
         {/* About me */}
-        <section className='flex min-h-[60vh]  mt-32 lg:w-[80%] mx-auto  flex-col '>
+        <section
+          name='about'
+          className='flex min-h-[60vh]  mt-32 lg:w-[80%] mx-auto  flex-col '>
           <div className='flex items-center'>
             <h2 className='text-gray-200 md:text-2xl lg:text-3xl text-xl'>
               About me
@@ -171,7 +175,9 @@ export default function Home({ landingPageContent, projects, previousJobs }) {
           </div>
         </section>
         {/* Where i've worked */}
-        <section className='flex min-h-[60vh] mt-20   lg:w-[60%] mx-auto  flex-col items-center'>
+        <section
+          name='previous'
+          className='flex min-h-[60vh] mt-20   lg:w-[60%] mx-auto  flex-col items-center'>
           <div className='flex items-center w-full  mb-4'>
             <h2 className='text-gray-200 md:text-2xl lg:text-3xl text-xl'>
               Previous jobs
@@ -205,7 +211,9 @@ export default function Home({ landingPageContent, projects, previousJobs }) {
           </div>
         </section>
         {/* Some of my work */}
-        <section className='flex min-h-[60vh] mt-10  lg:w-[100%] mx-auto flex-col '>
+        <section
+          name='work'
+          className='flex min-h-[60vh] mt-10  lg:w-[100%] mx-auto flex-col '>
           <div className='flex items-center w-full  mb-10'>
             <h2 className='text-gray-200 md:text-2xl lg:text-3xl text-xl'>
               Some of my work
@@ -221,7 +229,9 @@ export default function Home({ landingPageContent, projects, previousJobs }) {
           </div>
         </section>
         {/* Contact */}
-        <section className='md:min-h-[50vh] min-h-[40vh] md:w-[40%] mt-20 md:mt-0 mx-auto text-center'>
+        <section
+          name='contact'
+          className='md:min-h-[50vh] min-h-[40vh] md:w-[40%] mt-20 md:mt-0 mx-auto text-center'>
           <h2 className='text-gray-200 md:text-3xl lg:text-4xl text-xl'>
             Get in touch
           </h2>

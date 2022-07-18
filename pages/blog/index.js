@@ -37,7 +37,7 @@ const Blog = ({ blogs }) => {
     )
   } else {
     return (
-      <div>
+      <div className='h-[70vh]  lg:min-h-[60vh]'>
         <Head>
           <title>My Blog</title>
           <meta
@@ -48,13 +48,13 @@ const Blog = ({ blogs }) => {
             name='viewport'
             content='width=device-width, initial-scale=1'></meta>
         </Head>
-        <div className='flex items-center'>
+        <div className='flex items-center  '>
           <h2 className='text-gray-200 md:text-2xl lg:text-3xl text-xl'>
             Blog
           </h2>
           <div className='md:w-[40%] lg:w-[20%] w-[50%] h-[0.1px] bg-gray-50 bg-opacity-20 ml-2'></div>
         </div>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6 '>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6  '>
           {blogs.map((blog) => {
             return (
               <>
@@ -91,6 +91,10 @@ const Blog = ({ blogs }) => {
 export default Blog
 
 export const getServerSideProps = async ({ req, res }) => {
+  res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=10, stale-while-revalidate=59"
+  )
   const blogs = await client.fetch(`*[_type=="post"]{
     _id,
     blogtitle,

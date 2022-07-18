@@ -41,7 +41,7 @@ const SingleBlog = ({ blog }) => {
     },
   }
   return (
-    <div className='w-[90%]  md:w-[80%] lg:w-[60%] mx-auto'>
+    <div className='w-[100%] md:w-[80%] lg:w-[60%] mx-auto'>
       <Head>
         <title>{blog.blogtitle}</title>
         <meta name='description' content={blog.shortDescription} />
@@ -61,8 +61,8 @@ const SingleBlog = ({ blog }) => {
         <h4 className='text-gray-400'>{convertTimeStamp(blog.postedAt)}</h4>
         <div className='md:w-[70%] lg:w-[70%] w-[70%] h-[0.1px] bg-gray-50 bg-opacity-20 ml-2'></div>
       </div>
-      <h1 className='text-4xl text-gray-200 mt-4 mb-4'>{blog.blogtitle}</h1>
-      <article className='text-lg text-gray-200 leading-loose tracking-wider portable'>
+      <h1 className='text-2xl text-gray-200 mt-4 mb-4'>{blog.blogtitle}</h1>
+      <article className='text-gray-300 leading-loose tracking-wider portable'>
         <PortableText value={blog.body} components={myPortableTextComponents} />
       </article>
       <div className='mb-4 mt-4 flex space-x-4 '>
@@ -95,6 +95,10 @@ const SingleBlog = ({ blog }) => {
 export default SingleBlog
 
 export const getServerSideProps = async ({ req, res, query }) => {
+  res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=10, stale-while-revalidate=59"
+  )
   const { slug } = query
   const blog = await client.fetch(`*[_type=="post" && slug.current=="${slug}"]{
     _id,

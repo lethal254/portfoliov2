@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
         <Header />
       </div>
 
-      <div className='min-h-[50vh] lg:w-[65%] md:w-[75%]  mx-auto md:px-0 px-6 relative '>
+      <div className='min-h-[50vh] lg:w-[65%] md:w-[75%]  mx-auto md:px-0 px-6 relative mt-20 '>
         <div className='fixed bottom-0 left-6 text-white text-xl  flex-col items-center  hidden md:inline-block'>
           <Link href='https://github.com/lethal254' passHref>
             <a target='_blank'>
