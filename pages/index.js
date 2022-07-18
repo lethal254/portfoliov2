@@ -55,8 +55,6 @@ export default function Home({ landingPageContent, projects, previousJobs }) {
   const [tabPosition, setTabPosition] = useState("left")
   const { width, height } = useWindowSize()
 
-  console.log(previousJobs)
-
   useEffect(() => {
     if (width < 800) {
       setTabPosition("top")
@@ -189,7 +187,7 @@ export default function Home({ landingPageContent, projects, previousJobs }) {
               {previousJobs.map((job) => {
                 return (
                   <>
-                    <TabPane tab={job.company} key='1'>
+                    <TabPane tab={job.company} key={job._id}>
                       <div>
                         <h3 className='md:text-xl text-lg  text-gray-200'>
                           {job.title}
@@ -281,6 +279,7 @@ export async function getServerSideProps() {
 
   const previousJobs = await client.fetch(`
     *[_type == "previousJobs"]{
+      _id,
       title,
       company,
       fromDate,
