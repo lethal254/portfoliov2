@@ -1,5 +1,4 @@
 import Header from "./Header"
-import Head from "next/head"
 import { FiGithub, FiLinkedin, FiInstagram, FiTwitter } from "react-icons/fi"
 import Link from "next/link"
 
@@ -32,7 +31,7 @@ const Layout = ({ children }) => {
             </a>
           </Link>
 
-          <Link href='https://twitter.com/bennycodes' passHref>
+          <Link href='https://twitter.com/iam_bennycodes' passHref>
             <a target='_blank'>
               <FiTwitter className='mb-4 hover:text-sky-200 transition-all duration-150 ease-linear hover:-translate-y-2 cursor-pointer' />
             </a>
@@ -73,7 +72,7 @@ const Layout = ({ children }) => {
             </a>
           </Link>
 
-          <Link href='https://twitter.com/bennycodes' passHref>
+          <Link href='https://twitter.com/iam_bennycodes' passHref>
             <a target='_blank'>
               <FiTwitter className='mr-4 mb-2 hover:text-sky-200 hover:-translate-y-2 transition-all duration-150 ease-linear cursor-pointer' />
             </a>
